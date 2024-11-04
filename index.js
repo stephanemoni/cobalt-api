@@ -196,7 +196,7 @@ class CobaltAPI {
       // isAudioOnly: this.isAudioOnly,
       // isTTFullAudio: this.isTTFullAudio,
       // isAudioMuted: this.isAudioMuted,
-      youtubeDubLang: this.dubLang,
+      // youtubeDubLang: this.dubLang,
       disableMetadata: this.disableMetadata,
       // twitterGif: this.twitterGif,
       // tiktokH265: this.tiktokH265,
