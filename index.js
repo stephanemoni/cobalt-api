@@ -206,7 +206,7 @@ class CobaltAPI {
 
     try {
       const response = await axios.post(
-        "https://api.cobalt.tools/api/json",
+        "http://localhost:9000/",
         data,
         { headers }
       );
