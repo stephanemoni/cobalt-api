@@ -29,6 +29,9 @@ class CobaltAPI {
    * @param {string} url The URL to be used in requests.
    */
   constructor(url) {
+    if (!process.env.API_URL) {
+      throw new Error("API_URL env variable is missing, cobalt api can't start.");
+    }
     this.url = url;
     this.vCodec = "h264";
     this.vQuality = "720";
@@ -218,11 +221,9 @@ class CobaltAPI {
       data["downloadMode"] = 'video';
     }
 
-    console.log (data);
-
     try {
       const response = await axios.post(
-        "http://localhost:9000/",
+        process.env.API_URL,
         data,
         { headers }
       );
