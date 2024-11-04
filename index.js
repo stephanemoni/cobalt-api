@@ -35,6 +35,7 @@ class CobaltAPI {
     this.aFormat = "mp3";
     this.filenamePattern = "classic";
     this.isAudioOnly = false;
+    this.isVideoOnly = false;
     this.isTTFullAudio = false;
     this.isAudioMuted = false;
     this.dubLang = false;
@@ -126,6 +127,13 @@ class CobaltAPI {
   }
 
   /**
+   * Enables downloading only video.
+   */
+  enableVideoOnly() {
+    this.isVideoOnly = true;
+  }
+
+  /**
    * Enables downloading only audio.
    */
   enableAudioOnly() {
@@ -185,10 +193,6 @@ class CobaltAPI {
       "Content-Type": "application/json",
     };
 
-    if (this.acceptLanguage !== null) {
-      // headers["Accept-Language"] = this.acceptLanguage;
-    }
-
     const data = {
       url: this.url,
       videoQuality: this.vQuality,
@@ -196,13 +200,23 @@ class CobaltAPI {
       // isAudioOnly: this.isAudioOnly,
       // isTTFullAudio: this.isTTFullAudio,
       // isAudioMuted: this.isAudioMuted,
-      youtubeDubLang: this.acceptLanguage,
       disableMetadata: this.disableMetadata,
-      // twitterGif: this.twitterGif,
-      // tiktokH265: this.tiktokH265,
+      twitterGif: this.twitterGif,
+      tiktokH265: this.tiktokH265,
       youtubeVideoCodec: this.vCodec,
       audioFormat: this.aFormat,
     };
+
+    if (this.acceptLanguage !== null) {
+      data["youtubeDubLang"] = this.acceptLanguage;
+    }
+
+    if (this.isAudioOnly !== null) {
+      data["downloadMode"] = 'audio';
+    }
+    else if (this.isVideoOnly !== null) {
+      data["downloadMode"] = 'video';
+    }
 
     console.log (data);
 
