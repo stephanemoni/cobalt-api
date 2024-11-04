@@ -204,6 +204,8 @@ class CobaltAPI {
       aFormat: this.aFormat,
     };
 
+    console.log(data);
+
     try {
       const response = await axios.post(
         "http://localhost:9000/",
