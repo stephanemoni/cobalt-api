@@ -191,17 +191,17 @@ class CobaltAPI {
 
     const data = {
       url: this.url,
-      // vQuality: this.vQuality,
-      // filenamePattern: this.filenamePattern,
+      videoQuality: this.vQuality,
+      filenameStyle: this.filenamePattern,
       // isAudioOnly: this.isAudioOnly,
       // isTTFullAudio: this.isTTFullAudio,
       // isAudioMuted: this.isAudioMuted,
-      // dubLang: this.dubLang,
-      // disableMetadata: this.disableMetadata,
-      // twitterGif: this.twitterGif,
-      // tiktokH265: this.tiktokH265,
-      // vCodec: this.vCodec,
-      // aFormat: this.aFormat,
+      youtubeDubLang: this.dubLang,
+      disableMetadata: this.disableMetadata,
+      twitterGif: this.twitterGif,
+      tiktokH265: this.tiktokH265,
+      youtubeVideoCodec: this.vCodec,
+      audioFormat: this.aFormat,
     };
 
     try {
