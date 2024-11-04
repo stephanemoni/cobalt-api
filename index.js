@@ -198,11 +198,13 @@ class CobaltAPI {
       // isAudioMuted: this.isAudioMuted,
       youtubeDubLang: this.dubLang,
       disableMetadata: this.disableMetadata,
-      twitterGif: this.twitterGif,
-      tiktokH265: this.tiktokH265,
+      // twitterGif: this.twitterGif,
+      // tiktokH265: this.tiktokH265,
       youtubeVideoCodec: this.vCodec,
       audioFormat: this.aFormat,
     };
+
+    console.log (data);
 
     try {
       const response = await axios.post(
