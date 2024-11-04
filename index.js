@@ -1,3 +1,4 @@
+require('dotenv').config();
 const axios = require("axios");
 const ytdl = require("ytdl-core");
 
@@ -30,6 +31,7 @@ class CobaltAPI {
    */
   constructor(url) {
     if (!process.env.API_URL) {
+      console.log('API_URL', process.env.API_URL);
       throw new Error("API_URL env variable is missing, cobalt api can't start.");
     }
     this.url = url;
