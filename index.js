@@ -211,10 +211,10 @@ class CobaltAPI {
       data["youtubeDubLang"] = this.acceptLanguage;
     }
 
-    if (this.isAudioOnly !== null) {
+    if (this.isAudioOnly !== false) {
       data["downloadMode"] = 'audio';
     }
-    else if (this.isVideoOnly !== null) {
+    else if (this.isVideoOnly !== false) {
       data["downloadMode"] = 'video';
     }
 
