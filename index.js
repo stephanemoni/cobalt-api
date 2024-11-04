@@ -186,7 +186,7 @@ class CobaltAPI {
     };
 
     if (this.acceptLanguage !== null) {
-      headers["Accept-Language"] = this.acceptLanguage;
+      // headers["Accept-Language"] = this.acceptLanguage;
     }
 
     const data = {
@@ -196,7 +196,7 @@ class CobaltAPI {
       // isAudioOnly: this.isAudioOnly,
       // isTTFullAudio: this.isTTFullAudio,
       // isAudioMuted: this.isAudioMuted,
-      // youtubeDubLang: this.dubLang,
+      youtubeDubLang: this.acceptLanguage,
       disableMetadata: this.disableMetadata,
       // twitterGif: this.twitterGif,
       // tiktokH265: this.tiktokH265,
