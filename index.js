@@ -202,9 +202,6 @@ class CobaltAPI {
       "Content-Type": "application/json",
 	  "Authorization": "Api-Key " + process.env.API_KEY,
     };
-	
-	console.log('headers:', headers);
-	console.log('API_URL:', process.env.API_URL);
 
     const data = {
       url: this.url,
