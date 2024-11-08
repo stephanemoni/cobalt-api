@@ -196,6 +196,7 @@ class CobaltAPI {
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
+	  "Authorization": "Api-Key " + process.env.API_KEY,
     };
 
     const data = {
