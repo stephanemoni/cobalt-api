@@ -32,7 +32,11 @@ class CobaltAPI {
   constructor(url) {
     if (!process.env.API_URL) {
       console.log('API_URL', process.env.API_URL);
-      throw new Error("API_URL env variable is missing, cobalt api can't start.");
+      throw new Error("API_URL env variable is missing, Media downloader api can't start.");
+    }
+	if (!process.env.API_KEY) {
+      console.log('API_KEY', process.env.API_KEY);
+      throw new Error("API_KEY env variable is missing, Media downloader api can't start.");
     }
     this.url = url;
     this.vCodec = "h264";
