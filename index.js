@@ -251,6 +251,14 @@ class CobaltAPI {
     if (this.acceptLanguage !== null) {
       data["youtubeDubLang"] = this.acceptLanguage;
     }
+	
+	if (this.startTime !== null) {
+      data["startTime"] = this.startTime;
+    }
+	
+	if (this.endTime !== null) {
+      data["endTime"] = this.endTime;
+    }
 
     if (this.isAudioOnly !== false) {
       data["downloadMode"] = 'audio';
