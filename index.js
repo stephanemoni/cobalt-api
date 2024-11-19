@@ -1,6 +1,7 @@
 require('dotenv').config();
 const axios = require("axios");
 const ytdl = require("ytdl-core");
+const moment = require("moment");
 
 /**
  * Class CobaltAPI (Node.js YTDL Library)
@@ -52,6 +53,8 @@ class CobaltAPI {
     this.twitterGif = false;
     this.tiktokH265 = false;
     this.acceptLanguage = null;
+	this.startTime = null;
+	this.endTime = null;
   }
 
   /**
@@ -133,6 +136,34 @@ class CobaltAPI {
    */
   setAcceptLanguage(language) {
     this.acceptLanguage = language;
+  }
+  
+  /**
+   * Sets the start time for downloads.
+   *
+   * @param {string} format The desired start time in hh:mm:ss format or in ms.
+   * @throws {Error} If the provided format is not valid.
+   */
+  setStartTime(time) {
+    const allowedFormats = ["HH:mm:ss", "x"];
+    if (!moment(time, allowedFormats, true).isValid()) {
+      throw new Error("Invalid start time format");
+    }
+    this.startTime = time;
+  }
+  
+  /**
+   * Sets the end time for downloads.
+   *
+   * @param {string} format The desired end time in hh:mm:ss format or in ms.
+   * @throws {Error} If the provided format is not valid.
+   */
+  setEndTime(time) {
+    const allowedFormats = ["HH:mm:ss", "x"];
+    if (!moment(time, allowedFormats, true).isValid()) {
+      throw new Error("Invalid start time format");
+    }
+    this.endTime = time;
   }
 
   /**
