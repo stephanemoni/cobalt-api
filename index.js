@@ -161,7 +161,7 @@ class CobaltAPI {
   setEndTime(time) {
     const allowedFormats = ["HH:mm:ss", "x"];
     if (!moment(time, allowedFormats, true).isValid()) {
-      throw new Error("Invalid start time format");
+      throw new Error("Invalid end time format");
     }
     this.endTime = time;
   }
