@@ -2,6 +2,7 @@ require('dotenv').config();
 const axios = require("axios");
 const ytdl = require("ytdl-core");
 const moment = require("moment");
+const yup = require("yup");
 
 /**
  * Class CobaltAPI (Node.js YTDL Library)
@@ -174,13 +175,12 @@ class CobaltAPI {
    * @throws {Error} If the provided format is not valid.
    */
   setWatermark(watermarkArray) {
-	import { object, string, number, array } from 'yup';
 	
-	let schema = object({
-		url: string().url().required("Enter watermark URL"), //watermark URL required
-		position: string().default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
-		scale: number().positive(),
-		opacity: number().min(0).max(1)
+	let schema = yup.object({
+		url: yup.string().url().required("Enter watermark URL"), //watermark URL required
+		position: yup.string().default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
+		scale: yup.number().positive(),
+		opacity: yup.number().min(0).max(1)
 	});
 	
     const isValid = schema.isValidSync(watermarkArray);
