@@ -174,7 +174,7 @@ class CobaltAPI {
    * @param {array} format The desired watermark ["URL","position","scale","opacity"].
    * @throws {Error} If the provided format is not valid.
    */
-  setWatermark(watermarkArray) {
+  async setWatermark(watermarkArray) {
 	
 	let schema = yup.object({
 		url: yup.string().url().required("Enter watermark URL"), //watermark URL required
@@ -183,13 +183,20 @@ class CobaltAPI {
 		opacity: yup.number().min(0).max(1)
 	});
 	
-	const watermarkObject = Object.assign({}, watermarkArray);
-    const isValid = schema.isValidSync(watermarkObject);
-	if (!isValid) {
-		console.log('default schema', schema.default()); 
-		schema.validate(watermarkObject);
-		throw new Error(isValid);
-    }
+	try {
+		const watermarkObject = Object.assign({}, watermarkArray);
+		const isValid = schema.isValidSync(watermarkObject);
+		
+		if (!isValid) {
+			console.log('default schema', schema.default());
+			console.log('watermarkObject', watermarkObject);
+			
+			// parse and assert validity
+			let watermarkValidation = await schema.validate(watermarkObject);				
+		}
+	} catch (error) {
+		throw new Error("Failed to validate watermark options");
+	}
     this.watermark = watermarkArray;
   }
 
