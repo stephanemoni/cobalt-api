@@ -186,7 +186,7 @@ class CobaltAPI {
     const isValid = schema.isValidSync(watermarkArray);
 	if (!isValid) {
 		console.log('default schema', schema.default()); 
-		await schema.validate(watermarkArray);
+		schema.validate(watermarkArray);
 		throw new Error(isValid);
     }
     this.watermark = watermarkArray;
