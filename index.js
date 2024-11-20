@@ -55,6 +55,7 @@ class CobaltAPI {
     this.acceptLanguage = null;
 	this.startTime = null;
 	this.endTime = null;
+	this.watermark = null;
   }
 
   /**
@@ -164,6 +165,29 @@ class CobaltAPI {
       throw new Error("Invalid end time format");
     }
     this.endTime = time;
+  }
+  
+  /**
+   * Sets the watermark/logo for downloads.
+   *
+   * @param {array} format The desired watermark ["URL","position","scale","opacity"].
+   * @throws {Error} If the provided format is not valid.
+   */
+  setWatermark(watermarkArray) {
+	import { object, string, number, array } from 'yup';
+	
+	let schema = object({
+		url: string().url().required("Enter watermark URL"), //watermark URL required
+		position: string().default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
+		scale: number().positive(),
+		opacity: number().min(0).max(1),
+	});
+	
+    const isValid = schema.isValidSync(watermarkArray);
+	if (!isValid) {
+      throw new Error(isValid);
+    }
+    this.watermark = watermarkArray;
   }
 
   /**
