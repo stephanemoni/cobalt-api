@@ -176,9 +176,9 @@ class CobaltAPI {
    */
   setWatermark(watermarkArray) {
 	
-	let schema = yup.object({
+	let schema = yup.array({
 		url: yup.string().url().required("Enter watermark URL"), //watermark URL required
-		position: yup.string().default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
+		position: yup.string("Enter watermark position in x:y format or among the predefined list").default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
 		scale: yup.number().positive(),
 		opacity: yup.number().min(0).max(1)
 	});
