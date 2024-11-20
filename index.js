@@ -176,12 +176,12 @@ class CobaltAPI {
    */
   setWatermark(watermarkArray) {
 	
-	let schema = yup.tuple([
-		yup.string().label('url').url().required("Enter watermark URL"), //watermark URL required
-		yup.string.label('position')("Enter watermark position in x:y format or among the predefined list").default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
-		yup.number().label('scale').positive(),
-		yup.number().label('opacity').min(0).max(1)
-	]);
+	let schema = yup.object({
+		url: yup.string().url().required("Enter watermark URL"), //watermark URL required
+		position: yup.string("Enter watermark position in x:y format or among the predefined list").default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
+		scale: yup.number().positive(),
+		opacity: yup.number().min(0).max(1)
+	});
 	
     const isValid = schema.isValidSync(watermarkArray);
 	if (!isValid) {
