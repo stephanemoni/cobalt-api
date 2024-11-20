@@ -183,7 +183,7 @@ class CobaltAPI {
 		opacity: yup.number().min(0).max(1)
 	});
 	
-	cosnt watermarkObject = Object.assign({}, watermarkArray);
+	const watermarkObject = Object.assign({}, watermarkArray);
     const isValid = schema.isValidSync(watermarkObject);
 	if (!isValid) {
 		console.log('default schema', schema.default()); 
