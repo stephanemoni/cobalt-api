@@ -180,7 +180,7 @@ class CobaltAPI {
 		url: string().url().required("Enter watermark URL"), //watermark URL required
 		position: string().default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
 		scale: number().positive(),
-		opacity: number().min(0).max(1),
+		opacity: number().min(0).max(1)
 	});
 	
     const isValid = schema.isValidSync(watermarkArray);
