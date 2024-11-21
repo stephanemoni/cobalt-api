@@ -178,7 +178,7 @@ class CobaltAPI {
 	const watermarkArrKeys = {0:'url',1:'position',2:'scale',3:'opacity'};
 	let schema = yup.object({
 		[watermarkArrKeys[0]]: yup.string().url().required("Enter watermark URL"), //watermark URL required
-		[watermarkArrKeys[1]]: yup.string("Enter watermark position in x:y format or among the predefined list").default('topLeft').matches(/^(topLeft|topRight|bottomLeft|bottomRight|center|[\d+\:\d+])$/),
+		[watermarkArrKeys[1]]: yup.string("Enter watermark position in x:y format or among the predefined list").default('topLeft').matches(/^(topLeft|topRight|bottomLeft|bottomRight|center|\d+:\d+))$/),
 		[watermarkArrKeys[2]]: yup.number().positive(),
 		[watermarkArrKeys[3]]: yup.number().min(0).max(1)
 	});
