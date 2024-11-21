@@ -184,7 +184,7 @@ class CobaltAPI {
 	});
 	
 	try {
-		const watermarkObject = Object.assign({}, JSON.parse(watermarkArray));
+		const watermarkObject = JSON.parse(watermarkArray);
 		const isValid = schema.isValidSync(watermarkObject);
 		
 		if (!isValid) {
@@ -195,7 +195,7 @@ class CobaltAPI {
 			let watermarkValidation = await schema.validate(watermarkObject);				
 		}
 	} catch (error) {
-		throw new Error("Failed to validate watermark options");
+		throw new Error("Failed to validate watermark options:" + error.message);
 	}
     this.watermark = watermarkArray;
   }
