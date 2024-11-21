@@ -308,6 +308,8 @@ class CobaltAPI {
     else if (this.isVideoOnly !== false) {
       data["downloadMode"] = 'video';
     }
+	
+	console.log('data',data);
 
     try {
       const response = await axios.post(
