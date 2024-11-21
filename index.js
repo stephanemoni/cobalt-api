@@ -177,10 +177,10 @@ class CobaltAPI {
   async setWatermark(watermarkArray) {
 	
 	let schema = yup.object({
-		url: yup.string().url().required("Enter watermark URL"), //watermark URL required
-		position: yup.string("Enter watermark position in x:y format or among the predefined list").default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
-		scale: yup.number().positive(),
-		opacity: yup.number().min(0).max(1)
+		0: yup.string().url().required("Enter watermark URL"), //watermark URL required
+		1: yup.string("Enter watermark position in x:y format or among the predefined list").default('topLeft').matches(/(topLeft|topRight|bottomLeft|bottomRight|center|[\d:\d])/),
+		2: yup.number().positive(),
+		3: yup.number().min(0).max(1)
 	});
 	
 	try {
@@ -195,7 +195,7 @@ class CobaltAPI {
 			let watermarkValidation = await schema.validate(watermarkObject);				
 		}
 	} catch (error) {
-		throw new Error("Failed to validate watermark array values:" + error.message);
+		throw new Error("Failed to validate watermark array values. " + error.message);
 	}
     this.watermark = watermarkArray;
   }
