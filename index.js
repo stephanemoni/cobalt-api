@@ -184,7 +184,7 @@ class CobaltAPI {
 	});
 	
 	try {
-		const watermarkObject = Object.assign({}, watermarkArray);
+		const watermarkObject = Object.assign({}, JSON.parse(watermarkArray));
 		const isValid = schema.isValidSync(watermarkObject);
 		
 		if (!isValid) {
