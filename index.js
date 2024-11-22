@@ -184,7 +184,7 @@ class CobaltAPI {
 	});
 	
 	try {
-		const originalObject = Object.assign({}, JSON.parse(watermarkArray));
+		const originalObject = (typeof (watermarkArray) === 'object') ? watermarkArray : Object.assign({}, JSON.parse(watermarkArray));
 		const watermarkObject = Object.fromEntries(
 		  Object.entries(originalObject).map(([key, value]) => 
 			// Modify key here
