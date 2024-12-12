@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require("axios");
-const ytdl = require("@distube/ytdl-core");
+const ytdl = require("@stephanemoni/ytdl-core");
 const moment = require("moment");
 const yup = require("yup");
 
