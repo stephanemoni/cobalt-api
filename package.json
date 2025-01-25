@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/code3-dev/CobaltAPI#readme",
   "dependencies": {
+    "@distube/ytdl-core": "^4.15.9",
     "@stephanemoni/ytdl-core": "github:stephanemoni/ytdl-core",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",

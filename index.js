@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require("axios");
-const ytdl = require("@stephanemoni/ytdl-core");
+const ytdl = require("@distube/ytdl-core");
 const moment = require("moment");
 const yup = require("yup");
 
@@ -345,7 +345,11 @@ class CobaltAPI {
     }
 
     try {
-      const info = await ytdl.getInfo(this.url);
+	  if (process.env.PROXY_AGENT) {
+		const agent = ytdl.createProxyAgent({ uri: process.env.PROXY_AGENT });
+		const info = await ytdl.getInfo(this.url, { agent });
+	  }
+      else const info = await ytdl.getInfo(this.url);
       const formats = ytdl.filterFormats(info.formats, "video");
       const qualities = formats
         .map((format) =>
