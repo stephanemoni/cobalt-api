@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require("axios");
-const axiosRetry = require('axios-retry');
+const axiosRetry = require('axios-retry').default;
 const ytdl = require("@distube/ytdl-core");
 const moment = require("moment");
 const yup = require("yup");
@@ -319,7 +319,7 @@ class CobaltAPI {
 			},
 			retryCondition: (error) => {
 				// if retry condition is not specified, by default idempotent requests are retried
-				return error.response.status === 503;
+				return error.response.status === 500;
 			},
 		});
 
@@ -330,6 +330,8 @@ class CobaltAPI {
       );
       const statusCode = response.status;
       const responseData = response.data;
+	  
+	  console.log('statusCode', statusCode);
 
       if (statusCode === 200 && responseData.status !== "error") {
         return { status: true, data: responseData };
