@@ -311,7 +311,7 @@ class CobaltAPI {
     }
 
     try {
-		axiosRetry.axiosRetry(axios, {
+		axiosRetry(axios, {
 			retries: 3, // number of retries
 			retryDelay: (retryCount) => {
 				console.log(`retry attempt: ${retryCount}`);
