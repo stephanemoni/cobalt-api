@@ -309,20 +309,28 @@ class CobaltAPI {
     else if (this.isVideoOnly !== false) {
       data["downloadMode"] = 'video';
     }
+	
+	// Error list for which attempt a retry
+	var errorID = 0, errorArray = [];
+	while(process.env[`ERROR_${errorID}`] !== undefined) {
+		errorArray[errorID] = process.env[`ERROR_${errorID}`];
+		errorID++;
+	}
+	
+	axiosRetry(axios, {
+		retries: process.env.ERROR_RETRY_COUNT !== undefined ? process.env.ERROR_RETRY_COUNT : 3, // number of retries
+		retryDelay: (retryCount) => {
+			console.log(`retry attempt: ${retryCount}`);
+			return process.env.ERROR_RETRY_DELAY !== undefined ? retryCount * process.env.ERROR_RETRY_DELAY : retryCount * 2000; // time interval between retries
+		},
+		retryCondition: (error) => {
+			// if retry condition is not specified, by default idempotent requests are retried
+			return error.response.data ? errorArray.includes(error.response.data.error.code) : error.response.status === 500;
+		},
+	});
 
     try {
-		axiosRetry(axios, {
-			retries: 3, // number of retries
-			retryDelay: (retryCount) => {
-				console.log(`retry attempt: ${retryCount}`);
-				return retryCount * 2000; // time interval between retries
-			},
-			retryCondition: (error) => {
-				// if retry condition is not specified, by default idempotent requests are retried
-				return error.response.status === 500;
-			},
-		});
-
+		
       const response = await axios.post(
         process.env.API_URL,
         data,
@@ -330,8 +338,6 @@ class CobaltAPI {
       );
       const statusCode = response.status;
       const responseData = response.data;
-	  
-	  console.log('statusCode', statusCode);
 
       if (statusCode === 200 && responseData.status !== "error") {
         return { status: true, data: responseData };
