@@ -1,5 +1,6 @@
 require('dotenv').config();
 const axios = require("axios");
+const axiosRetry = require('axios-retry');
 const ytdl = require("@distube/ytdl-core");
 const moment = require("moment");
 const yup = require("yup");
@@ -310,6 +311,18 @@ class CobaltAPI {
     }
 
     try {
+		axiosRetry(axios, {
+			retries: 3, // number of retries
+			retryDelay: (retryCount) => {
+				console.log(`retry attempt: ${retryCount}`);
+				return retryCount * 2000; // time interval between retries
+			},
+			retryCondition: (error) => {
+				// if retry condition is not specified, by default idempotent requests are retried
+				return error.response.status === 503;
+			},
+		});
+
       const response = await axios.post(
         process.env.API_URL,
         data,
