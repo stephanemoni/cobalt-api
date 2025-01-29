@@ -376,7 +376,7 @@ class CobaltAPI {
         .filter((v, i, a) => a.indexOf(v) === i);
       return qualities;
     } catch (error) {
-		throw new Error("Failed to fetch video qualities");
+		throw new Error(error.message);
     }
   }
 }
