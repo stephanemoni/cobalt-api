@@ -307,7 +307,7 @@ class CobaltAPI {
       data["downloadMode"] = 'audio';
     }
     else if (this.isVideoOnly !== false) {
-      data["downloadMode"] = 'video';
+      data["downloadMode"] = 'mute';
     }
 	
 	// Error list for which attempt a retry
