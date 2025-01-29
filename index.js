@@ -376,15 +376,6 @@ class CobaltAPI {
         .filter((v, i, a) => a.indexOf(v) === i);
       return qualities;
     } catch (error) {
-		// Handle error
-		console.error(error.message);
-		// Error list for which attempt a process restart
-		var errorID = 0, errorArray = [];
-		while(process.env[`ERROR_${errorID}`] !== undefined) {
-			errorArray[errorID] = process.env[`ERROR_${errorID}`];
-			errorID++;
-		}
-		if (errorArray.includes(error.message)) process.exit(0);
 		throw new Error("Failed to fetch video qualities");
     }
   }
