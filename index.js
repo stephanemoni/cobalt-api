@@ -366,8 +366,8 @@ class CobaltAPI {
     }
 
     try {
-	  //const agent = ytdl.createProxyAgent({ uri: process.env.PROXY_AGENT });
-	  const info = await ytdl.getInfo(this.url);
+	  const agent = ytdl.createProxyAgent({ uri: process.env.PROXY_AGENT });
+	  const info = await ytdl.getInfo(this.url, {agent});
       const formats = ytdl.filterFormats(info.formats, "video");
       const qualities = formats
         .map((format) =>
@@ -376,7 +376,16 @@ class CobaltAPI {
         .filter((v, i, a) => a.indexOf(v) === i);
       return qualities;
     } catch (error) {
-      throw new Error("Failed to fetch video qualities");
+		// Handle error
+		console.error(error.message);
+		// Error list for which attempt a process restart
+		var errorID = 0, errorArray = [];
+		while(process.env[`ERROR_${errorID}`] !== undefined) {
+			errorArray[errorID] = process.env[`ERROR_${errorID}`];
+			errorID++;
+		}
+		if (errorArray.includes(error.message)) process.exit(0);
+		throw new Error("Failed to fetch video qualities");
     }
   }
 }
