@@ -366,8 +366,8 @@ class CobaltAPI {
     }
 
     try {
-	  //const agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY });
-	  const info = await ytdl.getInfo(this.url);
+	  const agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY });
+	  const info = await ytdl.getInfo(this.url, { agent });
       const formats = ytdl.filterFormats(info.formats, "video");
       const qualities = formats
         .map((format) =>
