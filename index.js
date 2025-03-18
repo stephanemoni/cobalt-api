@@ -4,6 +4,7 @@ const axiosRetry = require('axios-retry').default;
 const ytdl = require("@distube/ytdl-core");
 const moment = require("moment");
 const yup = require("yup");
+const fs = require('fs');
 
 /**
  * Class CobaltAPI (Node.js YTDL Library)
