@@ -2,6 +2,11 @@ require('dotenv').config();
 const axios = require("axios");
 const axiosRetry = require('axios-retry').default;
 const ytdl = require("@distube/ytdl-core");
+const NodeFetchCache = require('node-fetch-cache');
+const { MemoryCache } = require('node-fetch-cache');
+const fetch = NodeFetchCache.create({
+  cache: new MemoryCache({ ttl: 3600 })
+});
 const moment = require("moment");
 const yup = require("yup");
 const fs = require('fs');
@@ -368,7 +373,12 @@ class CobaltAPI {
 
     try {
 	  //const agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY });
-	  const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
+	  const data = await fetch( process.env.COOKIE_URL, {
+					headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" }
+				});
+	  let cookie = await data.text();
+	  //console.log("cookie",cookie);
+	  const agent = ytdl.createAgent(JSON.parse(cookie));
 	  const info = await ytdl.getInfo(this.url, { requestOptions: {
 					headers: {
 						"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
