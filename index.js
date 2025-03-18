@@ -366,8 +366,13 @@ class CobaltAPI {
     }
 
     try {
-	  const agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY });
-	  const info = await ytdl.getInfo(this.url, { agent });
+	  //const agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY });
+	  const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
+	  const info = await ytdl.getInfo(this.url, { requestOptions: {
+					headers: {
+						"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+					},
+				}, agent: agent });
       const formats = ytdl.filterFormats(info.formats, "video");
       const qualities = formats
         .map((format) =>
