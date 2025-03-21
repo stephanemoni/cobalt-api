@@ -372,13 +372,24 @@ class CobaltAPI {
     }
 
     try {
-	  //const agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY });
-	  const data = await fetch( process.env.COOKIE_URL, {
-					headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" }
-				});
-	  let cookie = await data.text();
-	  //console.log("cookie",cookie);
-	  const agent = ytdl.createAgent(JSON.parse(cookie));
+	  var agent;
+	if (process.env.COOKIE_URL) {				
+		const data = await fetch( process.env.COOKIE_URL, {
+			headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" }
+		});
+		let cookie = await data.text();
+		//console.log("cookie",cookie);
+		// agent should be created once if you don't want to change your cookie
+		if (!process.env.COOKIE || process.env.COOKIE && process.env.COOKIE != cookie) {				
+			if (process.env.GLOBAL_AGENT_HTTP_PROXY) agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY }, JSON.parse(cookie));
+			else agent = ytdl.createAgent(JSON.parse(cookie));
+			//Save cookie
+			process.env.COOKIE = cookie;
+		}
+		else delete agent
+	}
+	else if (process.env.GLOBAL_AGENT_HTTP_PROXY) agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY });    
+	else delete agent;
 	  const info = await ytdl.getInfo(this.url, { requestOptions: {
 					headers: {
 						"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
