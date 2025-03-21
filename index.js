@@ -386,7 +386,7 @@ class CobaltAPI {
 			//Save cookie
 			process.env.COOKIE = cookie;
 		}
-		else delete agent
+		else agent = null;
 	}
 	else if (process.env.GLOBAL_AGENT_HTTP_PROXY) agent = ytdl.createProxyAgent({ uri: process.env.GLOBAL_AGENT_HTTP_PROXY });    
 	else delete agent;
