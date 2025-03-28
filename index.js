@@ -331,7 +331,7 @@ class CobaltAPI {
 		},
 		retryCondition: (error) => {
 			// if retry condition is not specified, by default idempotent requests are retried
-			return error.response.data ? errorArray.includes(error.response.data.error.code) : error.response.status === 500;
+			return error.response?.data && errorArray.includes(error.response.data.error.code) || error.response?.status && error.response.status === 500;
 		},
 	});
 
