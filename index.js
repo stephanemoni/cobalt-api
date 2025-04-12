@@ -272,7 +272,7 @@ class CobaltAPI {
    *
    * @returns {Promise<Object>} A promise that resolves to an object containing the status and data of the response.
    */
-  async sendRequest() {
+  async sendRequest(API_URL) {
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -326,7 +326,7 @@ class CobaltAPI {
 	axiosRetry(axios, {
 		retries: process.env.ERROR_RETRY_COUNT !== undefined ? process.env.ERROR_RETRY_COUNT : 3, // number of retries
 		retryDelay: (retryCount) => {
-			console.log(`retry attempt: ${retryCount}`);
+			console.log(`Server ${API_URL}, retry attempt: ${retryCount}`);
 			return process.env.ERROR_RETRY_DELAY !== undefined ? retryCount * process.env.ERROR_RETRY_DELAY : retryCount * 2000; // time interval between retries
 		},
 		retryCondition: (error) => {
@@ -338,7 +338,7 @@ class CobaltAPI {
     try {
 		
       const response = await axios.post(
-        process.env.API_URL,
+        API_URL,
         data,
         { headers }
       );
