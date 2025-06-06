@@ -64,6 +64,7 @@ class CobaltAPI {
 	this.startTime = null;
 	this.endTime = null;
 	this.watermark = null;
+	this.durationLimit = null;
   }
 
   /**
@@ -210,6 +211,19 @@ class CobaltAPI {
 		throw new Error("Failed to validate watermark array values: " + error.message);
 	}
   }
+  
+  /**
+   * Sets the duration limit for downloads.
+   *
+   * @param {string} format The video duration limit in minutes.
+   * @throws {Error} If the provided format is not valid.
+   */
+  setDurationLimit(time) {
+    if (!parseInt(time)) {
+      throw new Error("Invalid duration limit format");
+    }
+    this.durationLimit = time;
+  }
 
   /**
    * Enables downloading only video.
@@ -307,6 +321,10 @@ class CobaltAPI {
 	
 	if (this.watermark !== null) {
       data["watermark"] = this.watermark;
+    }
+	
+	if (this.durationLimit !== null) {
+      data["durationLimit"] = this.durationLimit;
     }
 
     if (this.isAudioOnly !== false) {
