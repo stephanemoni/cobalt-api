@@ -341,6 +341,7 @@ class CobaltAPI {
     else if (this.isVideoOnly !== false) {
       data["downloadMode"] = 'mute';
     }
+	data["localProcessing"] = 'preferred';
 	
 	// Error list for which attempt a retry
 	var errorID = 0, errorArray = [];
