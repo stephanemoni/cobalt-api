@@ -58,7 +58,7 @@ class CobaltAPI {
     this.isAudioMuted = false;
     this.dubLang = false;
     this.disableMetadata = false;
-    this.subtitleLang = null;
+    this.subtitleLanguage = null;
 	this.acceptLanguage = null;
 	this.startTime = null;
 	this.endTime = null;
@@ -342,8 +342,6 @@ class CobaltAPI {
     else if (this.isVideoOnly !== false) {
       data["downloadMode"] = 'mute';
     }
-	
-	console.log('data', data);
 	
 	// Error list for which attempt a retry
 	var errorID = 0, errorArray = [];
