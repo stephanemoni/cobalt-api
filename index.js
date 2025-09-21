@@ -342,6 +342,7 @@ class CobaltAPI {
       data["downloadMode"] = 'mute';
     }
 	data["localProcessing"] = 'preferred';
+	data["alwaysProxy"] = true;
 	
 	// Error list for which attempt a retry
 	var errorID = 0, errorArray = [];
@@ -369,7 +370,7 @@ class CobaltAPI {
         data,
         { headers }
       );
-	  console.log('response', response);
+	  
       const statusCode = response.status;
       const responseData = response.data;
 
