@@ -317,6 +317,7 @@ class CobaltAPI {
 	
 	if (this.subtitleLanguage !== null) {
       data["subtitleLang"] = this.subtitleLanguage;
+	  data["localProcessing"] = 'preferred';
     }
 	
 	if (this.startTime !== null) {
@@ -341,7 +342,6 @@ class CobaltAPI {
     else if (this.isVideoOnly !== false) {
       data["downloadMode"] = 'mute';
     }
-	data["localProcessing"] = 'preferred';
 	data["alwaysProxy"] = true;
 	
 	// Error list for which attempt a retry
