@@ -58,9 +58,8 @@ class CobaltAPI {
     this.isAudioMuted = false;
     this.dubLang = false;
     this.disableMetadata = false;
-    this.twitterGif = false;
-    this.tiktokH265 = false;
-    this.acceptLanguage = null;
+    this.subtitleLang = null;
+	this.acceptLanguage = null;
 	this.startTime = null;
 	this.endTime = null;
 	this.watermark = null;
@@ -140,6 +139,15 @@ class CobaltAPI {
     this.aFormat = format;
   }
 
+  /**
+   * Sets the subtitle language.
+   *
+   * @param {string} language.
+   */
+  setSubtitleLanguage(language) {
+    this.subtitleLanguage = language;
+  }
+  
   /**
    * Sets the custom Accept-Language header value for requests.
    *
@@ -305,6 +313,10 @@ class CobaltAPI {
 
     if (this.acceptLanguage !== null) {
       data["youtubeDubLang"] = this.acceptLanguage;
+    }
+	
+	if (this.subtitleLanguage !== null) {
+      data["subtitleLang"] = this.subtitleLanguage;
     }
 	
 	if (this.startTime !== null) {
