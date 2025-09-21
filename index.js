@@ -343,6 +343,8 @@ class CobaltAPI {
       data["downloadMode"] = 'mute';
     }
 	
+	console.log('data', data);
+	
 	// Error list for which attempt a retry
 	var errorID = 0, errorArray = [];
 	while(process.env[`ERROR_${errorID}`] !== undefined) {
