@@ -76,6 +76,7 @@ class CobaltAPI {
   setQuality(quality) {
     const allowedQualities = [
       "max",
+	  "4320",
       "2160",
       "1440",
       "1080",
@@ -297,12 +298,7 @@ class CobaltAPI {
       url: this.url,
       videoQuality: this.vQuality,
       filenameStyle: this.filenamePattern,
-      // isAudioOnly: this.isAudioOnly,
-      // isTTFullAudio: this.isTTFullAudio,
-      // isAudioMuted: this.isAudioMuted,
       disableMetadata: this.disableMetadata,
-      twitterGif: this.twitterGif,
-      tiktokH265: this.tiktokH265,
       youtubeVideoCodec: this.vCodec,
       audioFormat: this.aFormat,
     };
