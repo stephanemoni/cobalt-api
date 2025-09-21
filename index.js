@@ -369,6 +369,7 @@ class CobaltAPI {
         data,
         { headers }
       );
+	  console.log('response', response);
       const statusCode = response.status;
       const responseData = response.data;
 
