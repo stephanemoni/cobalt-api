@@ -309,6 +309,7 @@ class CobaltAPI {
       disableMetadata: this.disableMetadata,
       youtubeVideoCodec: this.vCodec,
       audioFormat: this.aFormat,
+	  youtubeHLS: true,
     };
 
     if (this.acceptLanguage !== null) {
@@ -342,6 +343,8 @@ class CobaltAPI {
     else if (this.isVideoOnly !== false) {
       data["downloadMode"] = 'mute';
     }
+	
+	//console.log('data', data);
 	
 	// Error list for which attempt a retry
 	var errorID = 0, errorArray = [];
